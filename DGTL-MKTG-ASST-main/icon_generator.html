@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Growth Coach - Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .icon-preview {
+            display: inline-block;
+            margin: 10px;
+            text-align: center;
+        }
+        .icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 4px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .icon-16 { width: 16px; height: 16px; font-size: 10px; }
+        .icon-48 { width: 48px; height: 48px; font-size: 24px; }
+        .icon-128 { width: 128px; height: 128px; font-size: 64px; }
+        .download-btn {
+            background: #4facfe;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>AI Growth Coach - Auto Icon Generator</h1>
+    <p>Click the buttons below to automatically generate and download the required icons:</p>
+    
+    <div class="icon-preview">
+        <div class="icon icon-16">🧠</div>
+        <br>
+        <button class="download-btn" onclick="downloadIcon(16)">Download 16x16</button>
+    </div>
+    
+    <div class="icon-preview">
+        <div class="icon icon-48">🧠</div>
+        <br>
+        <button class="download-btn" onclick="downloadIcon(48)">Download 48x48</button>
+    </div>
+    
+    <div class="icon-preview">
+        <div class="icon icon-128">🧠</div>
+        <br>
+        <button class="download-btn" onclick="downloadIcon(128)">Download 128x128</button>
+    </div>
+
+    <script>
+        function downloadIcon(size) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = size;
+            canvas.height = size;
+            
+            // Create gradient background
+            const gradient = ctx.createLinearGradient(0, 0, size, size);
+            gradient.addColorStop(0, '#4facfe');
+            gradient.addColorStop(1, '#00f2fe');
+            
+            // Fill background
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Add brain emoji
+            ctx.font = `${size * 0.6}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = 'white';
+            ctx.fillText('🧠', size/2, size/2);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = `icon${size}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+        
+        // Auto-generate all icons on page load
+        window.onload = function() {
+            // Auto-download after 2 seconds if user wants
+            setTimeout(() => {
+                if (confirm('Auto-generate all 3 icons now?')) {
+                    downloadIcon(16);
+                    setTimeout(() => downloadIcon(48), 500);
+                    setTimeout(() => downloadIcon(128), 1000);
+                }
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
