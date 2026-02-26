@@ -165,6 +165,33 @@ User Message (Discord/Telegram/etc.)
   → User sees reply
 ```
 
+## Critical: @mariozechner/pi-* Packages
+
+These are the proprietary core packages OpenClaw depends on. All MIT licensed.
+
+### pi-agent-core (v0.52.10) — THE BRAIN
+- `Agent` class — stateful agent with tools, thinking, steering
+- `agentLoop()` / `agentLoopContinue()` — the core loop: prompt → LLM → tool calls → repeat
+- `AgentMessage`, `AgentEvent`, `AgentContext` — message/event types
+- `AgentLoopConfig` — config for model, tools, context transform, steering
+- ~977 lines JS, ~1400 total with types
+- **This is what we must understand/replace for independence**
+
+### pi-ai (v0.52.10) — LLM ABSTRACTION  
+- `streamSimple()` — unified streaming interface to all LLM providers
+- `Model`, `Message`, `Tool`, `TextContent`, `ImageContent` — core types
+- Provider registry, API key management
+- Model catalog (12K+ lines of generated model definitions)
+- ~60K lines total
+
+### pi-coding-agent (v0.52.10) — CODING TOOLS
+- Coding-specific agent tools and workflows
+
+### pi-tui (v0.52.10) — TERMINAL UI
+- Terminal rendering, ink-based components
+
+**Vendored copies saved to `vendor/pi-packages/` for reference.**
+
 ## File Counts
 - ~490K lines of TypeScript in src/
 - ~1,050 non-test .ts files in src/ (depth 2)
